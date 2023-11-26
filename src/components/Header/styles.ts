@@ -23,13 +23,13 @@ export const ScreenName = styled.Text`
 export const NavigationButton = styled.TouchableOpacity``;
 
 export const AvatarImage = styled.Image`
-  width: 40;
-  height: 40;
+  width: 40px;
+  height: 40px;
 
   align-items: center;
   justify-content: center;
 
   border-color: ${({ theme }) => theme.COLORS.GRAY_600};
-  border-width: 2;
+  border-width: 2px;
   border-radius: 999px;
 `;
