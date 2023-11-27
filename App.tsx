@@ -7,7 +7,7 @@ import {
   NunitoSans_700Bold,
 } from "@expo-google-fonts/nunito-sans";
 
-import { Home } from "@screens/Home";
+import { Routes } from "@routes/index";
 
 import theme from "@theme/index";
 
@@ -24,7 +24,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
-        <Home />
+        <Routes />
       </ThemeProvider>
     </NavigationContainer>
   );
