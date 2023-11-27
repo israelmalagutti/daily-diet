@@ -1,16 +1,18 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 
-import { Container } from "./styles";
+import { BackgroundColor, Container } from "./styles";
 
 type LayoutProps = {
   children: React.ReactNode;
+
+  bgColor?: BackgroundColor;
 };
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ bgColor, children }: LayoutProps) {
   return (
     <>
-      <Container>{children}</Container>
+      <Container bgColor={bgColor}>{children}</Container>
       <StatusBar style="dark" />
     </>
   );
