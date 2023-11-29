@@ -43,7 +43,11 @@ export function Home() {
 
         <NewMealContainer>
           <MealsText>Meals</MealsText>
-          <Button text="Add a meal" icon="add" onPress={() => undefined} />
+          <Button
+            text="Add a meal"
+            icon="add"
+            onPress={() => navigation.navigate("NewMeal")}
+          />
         </NewMealContainer>
 
         <Meal.Sections meals={groupByDay(meals)} />
