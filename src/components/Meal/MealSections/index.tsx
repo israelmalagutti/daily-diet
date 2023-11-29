@@ -16,6 +16,7 @@ export type MealSections = {
 
 export type MealSectionProps = MealSections & {};
 
+/** fix: bottom of the list exceed screen limit and cannot be seem */
 export function MealSections({ meals }: MealSectionProps) {
   const renderSectionHeader = (section: MealSection) => {
     const date = section.title.split(" ");

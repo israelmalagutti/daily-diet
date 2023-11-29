@@ -26,7 +26,7 @@ export const Container = styled.Pressable<StatusCardProps>`
   align-items: center;
   justify-content: center;
 
-  padding: 20px 16px;
+  padding: 24px 16px;
 
   border-radius: 8px;
 `;
