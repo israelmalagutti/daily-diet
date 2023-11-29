@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 
-import { Button, Header, Input, Layout } from "@components/index";
+import { Button, DietPicker, Header, Input, Layout } from "@components/index";
 
 import { Label } from "@components/Input/styles";
+import { DietStyleProps } from "@components/DietPicker/styles";
 
-import { DateWrapper, FormContainer, FormWrapper } from "./styles";
+import {
+  DateWrapper,
+  DietPickerWrapper,
+  FormContainer,
+  FormWrapper,
+} from "./styles";
 
 type Meal = {
   name: string;
   description: string;
 
   date?: Date;
-  diet?: boolean;
+  diet?: DietStyleProps;
 };
 
 export function NewMeal() {
@@ -62,6 +68,22 @@ export function NewMeal() {
 
           {/* Container */}
           <Label>Is meal part of the diet?</Label>
+          <DietPickerWrapper>
+            <DietPicker
+              type="WITHIN"
+              isActive={meal.diet === "WITHIN"}
+              onPress={() =>
+                setMeal(prevState => ({ ...prevState, diet: "WITHIN" }))
+              }
+            />
+            <DietPicker
+              type="OFF"
+              isActive={meal.diet === "OFF"}
+              onPress={() =>
+                setMeal(prevState => ({ ...prevState, diet: "OFF" }))
+              }
+            />
+          </DietPickerWrapper>
         </FormWrapper>
 
         <Button
