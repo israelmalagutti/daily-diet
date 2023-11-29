@@ -1,8 +1,9 @@
+import { TouchableOpacityProps } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import { ButtonTypeStyleProps, Container, Icon, Text } from "./styles";
 
-type ButtonProps = {
+type ButtonProps = TouchableOpacityProps & {
   text: string;
   icon?: keyof typeof MaterialIcons.glyphMap;
 
@@ -10,9 +11,15 @@ type ButtonProps = {
   onPress?: () => void;
 };
 
-export function Button({ icon, text, type = "PRIMARY", onPress }: ButtonProps) {
+export function Button({
+  icon,
+  text,
+  type = "PRIMARY",
+  onPress,
+  ...rest
+}: ButtonProps) {
   return (
-    <Container type={type} onPress={onPress}>
+    <Container {...rest} type={type} onPress={onPress}>
       {icon && <Icon name={icon} size={18} />}
 
       <Text>{text}</Text>

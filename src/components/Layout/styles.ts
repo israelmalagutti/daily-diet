@@ -19,5 +19,5 @@ export const Container = styled.SafeAreaView<ContainerStyleProps>`
   background-color: ${({ theme, bgColor }) =>
     bgColor ? theme.COLORS[bgColor] : theme.COLORS.GRAY_100};
 
-  padding: ${PADDING_TOP}px 0 0;
+  padding: ${PADDING_TOP}px 24px 0;
 `;
