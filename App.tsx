@@ -1,5 +1,4 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { Text } from "react-native";
 import { ThemeProvider } from "styled-components";
 import {
   useFonts,
@@ -7,6 +6,7 @@ import {
   NunitoSans_700Bold,
 } from "@expo-google-fonts/nunito-sans";
 
+import { Loading } from "@screens/Loading";
 import { Routes } from "@routes/index";
 
 import theme from "@theme/index";
@@ -18,7 +18,7 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    <Text>Loading...</Text>;
+    return <Loading />;
   }
 
   return (
