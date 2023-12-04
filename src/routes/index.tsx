@@ -1,26 +1,17 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 
-import { Home } from "@screens/Home";
-
-import { NewMeal } from "@screens/Meal";
-
-export type MainNavigationRoutes = {
-  Home: undefined;
-
-  NewMeal: undefined;
-};
-
-const Stack = createNativeStackNavigator<MainNavigationRoutes>();
+import { AppRoutes } from "./app.routes";
 
 export function Routes() {
+  const { COLORS } = useTheme();
+
   return (
-    <Stack.Navigator
-      initialRouteName="NewMeal"
-      screenOptions={{ headerShown: false }}
-    >
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="NewMeal" component={NewMeal} />
-    </Stack.Navigator>
+    <View style={{ flex: 1, backgroundColor: COLORS.GRAY_100 }}>
+      <NavigationContainer>
+        <AppRoutes />
+      </NavigationContainer>
+    </View>
   );
 }
