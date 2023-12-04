@@ -5,11 +5,25 @@ import {
   TextInputProps,
 } from "react-native";
 
-import { Container, InputStyleProps, Label, StyledInput } from "./styles";
+import {
+  TextInputMaskOptionProp,
+  TextInputMaskTypeProp,
+} from "react-native-masked-text";
+
+import {
+  Container,
+  InputStyleProps,
+  Label,
+  StyledInput,
+  StyledMaskedInput,
+} from "./styles";
 
 type InputProps = TextInputProps & {
   label: string;
   size?: InputStyleProps;
+
+  maskType?: TextInputMaskTypeProp;
+  maskOptions?: TextInputMaskOptionProp;
 
   onTextChange?: (text: string) => string | void;
   onFocus?: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
@@ -19,6 +33,9 @@ type InputProps = TextInputProps & {
 export function Input({
   label,
   size = "DEFAULT",
+
+  maskType,
+  maskOptions,
 
   onTextChange,
   onBlur,
@@ -59,14 +76,29 @@ export function Input({
     <Container size={size}>
       <Label>{label}</Label>
 
-      <StyledInput
-        {...rest}
-        isActive={active}
-        value={value}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        onChangeText={handleTextChange}
-      />
+      {maskType ? (
+        // @ts-ignore
+        <StyledMaskedInput
+          {...rest}
+          type={maskType}
+          options={maskOptions}
+          isActive={active}
+          value={value}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          onChangeText={handleTextChange}
+        />
+      ) : (
+        // @ts-ignore
+        <StyledInput
+          {...rest}
+          isActive={active}
+          value={value}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          onChangeText={handleTextChange}
+        />
+      )}
     </Container>
   );
 }

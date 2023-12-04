@@ -1,3 +1,4 @@
+import { TextInputMask } from "react-native-masked-text";
 import styled, { css } from "styled-components/native";
 
 export type InputStyleProps = "DEFAULT" | "SM";
@@ -29,6 +30,20 @@ export const Label = styled.Text`
 `;
 
 export const StyledInput = styled.TextInput.attrs(({ theme }) => ({
+  cursorColor: theme.COLORS.GREEN_DARK,
+  selectionColor: theme.COLORS.GREEN_MID,
+}))<StyledInputProps>`
+  ${({ theme, isActive }) => css`
+    border-color: ${isActive ? theme.COLORS.GREEN_DARK : theme.COLORS.GRAY_300};
+  `};
+
+  padding: 14px;
+
+  border-width: 1px;
+  border-radius: 6px;
+`;
+
+export const StyledMaskedInput = styled(TextInputMask).attrs(({ theme }) => ({
   cursorColor: theme.COLORS.GREEN_DARK,
   selectionColor: theme.COLORS.GREEN_MID,
 }))<StyledInputProps>`
