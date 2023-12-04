@@ -1,16 +1,16 @@
 import { useCallback, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import { Button, Header, Layout, Meal, MealsStatus } from "@components/index";
 import { type MealType } from "@components/Meal/MealCard";
 
-import { MEALS } from "@storage/index";
+import { getAllMeals, MEALS } from "@storage/index";
 
 import {
   GroupedByReducerState,
   groupByDayReducer,
   statementListParser,
-} from "@utils/groupByDayRecuder";
+} from "@utils/groupByDayReducer";
 
 import { MealsContainer, MealsText, NewMealContainer } from "./styles";
 
@@ -32,6 +32,21 @@ export function Home() {
     []
   );
 
+  async function fetchMeals() {
+    try {
+      const data = await getAllMeals();
+      setMeals(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchMeals();
+    }, [])
+  );
+
   return (
     <Layout>
       <Header />
@@ -46,7 +61,7 @@ export function Home() {
           <Button
             text="Add a meal"
             icon="add"
-            onPress={() => navigation.navigate("NewMeal")}
+            onPress={() => navigation.navigate("newMeal")}
           />
         </NewMealContainer>
 
