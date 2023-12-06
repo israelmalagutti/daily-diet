@@ -1,9 +1,24 @@
-import { FlatList, SectionList } from "react-native";
-import styled from "styled-components/native";
+import { SectionList } from "react-native";
+import styled, { css } from "styled-components/native";
 
 export const Sections = styled.SectionList.attrs({
-  contentContainerStyle: { gap: 16 },
+  contentContainerStyle: { gap: 8, paddingBottom: 304 },
 })`` as unknown as typeof SectionList;
+
+const Header = styled.View`
+  ${({ theme }) => css`
+    background-color: ${theme.COLORS.GRAY_100};
+  `};
+
+  width: 100%;
+
+  flex-direction: row;
+
+  align-items: baseline;
+  justify-content: space-between;
+
+  padding: 0 0 8px;
+`;
 
 const Date = styled.Text`
   color: ${({ theme }) => theme.COLORS.GRAY_700};
@@ -19,20 +34,8 @@ const Year = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
 `;
 
-export const SectionTitle = {
+export const Section = {
+  Header,
   Date,
   Year,
 };
-
-export const DateContainer = styled.View`
-  width: 100%;
-
-  flex-direction: row;
-
-  align-items: baseline;
-  justify-content: space-between;
-`;
-
-export const MealsList = styled.FlatList`
-  gap: 8px;
-` as unknown as typeof FlatList;

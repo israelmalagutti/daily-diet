@@ -1,5 +1,11 @@
 import styled from "styled-components/native";
 
+import { DietStyleProps } from "@components/DietPicker/styles";
+
+type StatusStyleProps = {
+  type: DietStyleProps;
+};
+
 export const Container = styled.Pressable`
   flex-direction: row;
 
@@ -35,9 +41,10 @@ export const Name = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
 `;
 
-export const Status = styled.View<{ type: boolean }>`
+export const Status = styled.View<StatusStyleProps>`
   background-color: ${({ theme, type }) =>
-    type ? theme.COLORS.GREEN_MID : theme.COLORS.RED_MID};
+    (type === "WITHIN" && theme.COLORS.GREEN_MID) ||
+    (type === "OFF" && theme.COLORS.RED_MID)};
 
   width: 14px;
   height: 14px;

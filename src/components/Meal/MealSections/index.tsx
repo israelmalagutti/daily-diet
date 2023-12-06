@@ -1,9 +1,6 @@
-import {} from "react";
-import { parseISO } from "date-fns";
-
 import { MealType, MealCard } from "../MealCard";
 
-import { DateContainer, MealsList, Sections, SectionTitle } from "./styles";
+import { Section, Sections } from "./styles";
 
 export type MealSection = {
   title: string;
@@ -16,7 +13,10 @@ export type MealSections = {
 
 export type MealSectionProps = MealSections & {};
 
-/** fix: bottom of the list exceed screen limit and cannot be seem */
+/**
+ * fix: Sort order should be from newest to oldest
+ * fix: bottom of the list exceed screen limit and cannot be seem
+ */
 export function MealSections({ meals }: MealSectionProps) {
   const renderSectionHeader = (section: MealSection) => {
     const date = section.title.split(" ");
@@ -24,34 +24,31 @@ export function MealSections({ meals }: MealSectionProps) {
     const sectionYear = date[2];
 
     return (
-      <DateContainer>
-        <SectionTitle.Date>{sectionDate}</SectionTitle.Date>
-        <SectionTitle.Year>{sectionYear}</SectionTitle.Year>
-      </DateContainer>
+      <Section.Header>
+        <Section.Date>{sectionDate}</Section.Date>
+        <Section.Year>{sectionYear}</Section.Year>
+      </Section.Header>
     );
   };
 
-  const renderItem = (item: MealType[]) => (
-    <MealsList
-      data={item}
-      keyExtractor={(_, index) => index.toString()}
-      renderItem={({ item: meal }) => (
-        <MealCard
-          id={meal.id}
-          name={meal.name}
-          createdAt={meal.createdAt}
-          withinDiet={meal.withinDiet}
-        />
-      )}
+  const renderItem = (meal: MealType) => (
+    <MealCard
+      id={meal.id}
+      name={meal.name}
+      createdAt={meal.createdAt}
+      diet={meal.diet}
     />
   );
 
   return (
     <Sections
+      bounces={false}
+      stickySectionHeadersEnabled
+      showsVerticalScrollIndicator={false}
       sections={meals}
       keyExtractor={(_, index) => index.toString()}
       renderSectionHeader={({ section }) => renderSectionHeader(section)}
-      renderItem={({ section }) => renderItem(section.data)}
+      renderItem={({ item }) => renderItem(item)}
     />
   );
 }

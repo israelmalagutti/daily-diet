@@ -1,6 +1,8 @@
 import React from "react";
 import { format } from "date-fns";
 
+import { DietStyleProps } from "@components/DietPicker/styles";
+
 import { Container, Name, Spacer, Status, Time } from "./styles";
 
 export type MealType = {
@@ -8,19 +10,18 @@ export type MealType = {
 
   name: string;
   description?: string;
-  withinDiet: boolean;
 
   createdAt: string;
+
+  diet: DietStyleProps;
 };
 
 type MealCardProps = {
   onPress: (id: number) => void;
 };
 
-/** Fix time */
 export function MealCard(meal: MealType, { onPress }: MealCardProps) {
   const date = new Date(meal.createdAt);
-  // console.log(date);
 
   const formattedTime = format(date, "HH:mm");
 
@@ -30,7 +31,7 @@ export function MealCard(meal: MealType, { onPress }: MealCardProps) {
       <Spacer />
       <Name>{meal.name}</Name>
 
-      <Status type={meal.withinDiet} />
+      <Status type={meal.diet} />
     </Container>
   );
 }
