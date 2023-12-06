@@ -15,7 +15,7 @@ export function StatusTitle({
 }: StatusTitleProps) {
   return (
     <>
-      <Status>{(title && title) || (percentage && `${percentage}%`)}</Status>
+      <Status>{(title ?? title) || (percentage ?? `${percentage}%`)}</Status>
       <Text>
         {(text === "PRIMARY" && "meals within the diet") ||
           (text === "SECONDARY" && "meals off the diet") ||

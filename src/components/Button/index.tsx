@@ -20,7 +20,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <Container {...rest} type={type} onPress={onPress}>
-      {icon && <Icon name={icon} size={18} />}
+      {!!icon && <Icon name={icon} size={18} />}
 
       <Text>{text}</Text>
     </Container>

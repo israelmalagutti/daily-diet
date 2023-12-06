@@ -36,7 +36,7 @@ export function Header({ backButton, screenName }: HeaderProps) {
         <Logo />
       )}
 
-      <ScreenName>{screenName && screenName}</ScreenName>
+      <ScreenName>{screenName ?? screenName}</ScreenName>
 
       {/* AvatarPic */}
       {backButton ? (

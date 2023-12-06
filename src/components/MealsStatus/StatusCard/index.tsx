@@ -25,7 +25,7 @@ export function StatusCard({
 }: StatusCardProps) {
   return (
     <Container size={size} type={type} onPress={onPress}>
-      {hasIcon && <Icon type={type} />}
+      {!!hasIcon && <Icon type={type} />}
 
       {children}
     </Container>
