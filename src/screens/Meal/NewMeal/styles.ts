@@ -39,6 +39,10 @@ export const DateWrapper = styled(Wrapper)`
   gap: 20px;
 `;
 
-export const DietPickerWrapper = styled(Wrapper)`
+export const DietPickerWrapper = styled.View`
+  gap: 4px;
+`;
+
+export const DietPickerContainer = styled(Wrapper)`
   gap: 12px;
 `;
