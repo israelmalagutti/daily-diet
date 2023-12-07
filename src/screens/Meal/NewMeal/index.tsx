@@ -121,7 +121,7 @@ export function NewMeal() {
 
       await createMeal(newMeal);
 
-      navigation.navigate("home");
+      navigation.navigate("feedbackMeal", { diet: newMeal.diet });
     } catch (err) {
       const newError = new AppError("All form fields with * must be filled");
 
