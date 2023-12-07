@@ -1,7 +1,5 @@
 import React from "react";
 
-import { StatusTitle } from "../StatusTitle";
-
 import { Container, Icon, StatusCardStyleProps } from "./styles";
 
 type StatusCardProps = {
