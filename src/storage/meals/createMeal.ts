@@ -1,11 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { MealType } from "@components/Meal/MealCard";
+import { type MealType } from "@components/Meal/MealCard";
+import { type NewMealType } from "@screens/Meal/NewMeal";
+
 import { MEAL_COLLECTION } from "@storage/storageConfig";
 
 import { getAllMeals } from "./getAllMeals";
 
-export const createMeal = async (newMeal: MealType) => {
+export const createMeal = async (newMeal: NewMealType | MealType) => {
   try {
     const storedMeals = await getAllMeals();
 

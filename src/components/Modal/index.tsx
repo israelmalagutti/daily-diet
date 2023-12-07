@@ -8,7 +8,7 @@ import {
   Container,
   Message,
   StyledModal,
-} from "./styles.ts";
+} from "./styles";
 
 type ModalAction = {
   text: string;

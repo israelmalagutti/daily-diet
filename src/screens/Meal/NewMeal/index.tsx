@@ -2,7 +2,14 @@ import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { z } from "zod";
 
-import { Button, DietPicker, Header, Input, Layout } from "@components/index";
+import {
+  Button,
+  DietPicker,
+  Header,
+  Input,
+  Layout,
+  Modal,
+} from "@components/index";
 import { MealType } from "@components/Meal/MealCard";
 
 import { Label } from "@components/Input/styles";
@@ -17,33 +24,28 @@ import {
   FormContainer,
   FormWrapper,
 } from "./styles";
+import { AppError } from "@utils/AppError";
 
-type NewMealType = {
-  id: number | null;
+export type NewMealType = Partial<MealType>;
 
-  name: string;
-  description: string;
-
-  createdAt: string;
-  diet: DietStyleProps | null;
-};
-
-/**
- * Fix: first time entering the screen and submitting a new meal, id is null, but the second time it is initialized
- * Fix: After sending a meal, navigates to home screen, but if create another meal, it adds to the same time as the other
- */
 export function NewMeal() {
   const [meal, setMeal] = useState<NewMealType>({
-    id: null,
-    name: "",
-    description: "",
+    id: undefined,
+    name: undefined,
+    description: undefined,
 
-    createdAt: "",
-    diet: null,
+    createdAt: undefined,
+    diet: undefined,
   });
 
   const [date, setDate] = useState<string>("");
   const [time, setTime] = useState<string>("");
+
+  const [error, setError] = useState<{ message: string }>({
+    message: "",
+  });
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   const navigation = useNavigation();
 
@@ -92,20 +94,17 @@ export function NewMeal() {
     return formattedDate;
   };
 
-  const submitNewMeal = async (data: MealType) => {
+  const submitNewMeal = async () => {
     try {
       const storedMeals = await getAllMeals();
 
       const id = storedMeals.length + 1;
 
-      console.log(JSON.stringify(formatDate(date, time)));
-      // @ts-ignore
-      setMeal(prevState => ({
-        ...prevState,
+      const newMeal: NewMealType = {
+        ...meal,
         id,
-        createdAt: formatDate(date, time) || new Date().toISOString(),
-      }));
-      console.log("MEAL: " + JSON.stringify(meal));
+        createdAt: formatDate(date, time) ?? new Date().toISOString(),
+      };
 
       const formSchema = z.object({
         id: z.number(),
@@ -115,17 +114,24 @@ export function NewMeal() {
 
         createdAt: z.string(),
 
-        diet: z.custom(),
+        diet: z.string().min(1, "You must pick a diet type for this meal!"),
       });
 
-      formSchema.parse(meal);
+      formSchema.parse(newMeal);
 
-      await createMeal(meal);
+      await createMeal(newMeal);
 
-      navigation.navigate("feedbackMeal");
+      navigation.navigate("home");
     } catch (err) {
-      console.error(err);
+      const newError = new AppError("All form fields with * must be filled");
+
+      setError({ message: newError.message });
+      setModalOpen(true);
     }
+  };
+
+  const toggleModal = () => {
+    setModalOpen(prevState => !prevState);
   };
 
   return (
@@ -178,7 +184,6 @@ export function NewMeal() {
             />
           </DateWrapper>
 
-          {/* Container */}
           <DietPickerWrapper>
             <Label>Is meal part of the diet?*</Label>
             <DietPickerContainer>
@@ -200,9 +205,16 @@ export function NewMeal() {
         <Button
           text="Create meal"
           activeOpacity={0.85}
-          onPress={() => submitNewMeal(meal)}
+          onPress={submitNewMeal}
         />
       </FormContainer>
+
+      <Modal
+        transparent
+        visible={modalOpen}
+        message={error.message}
+        actions={[{ text: "Okay", onPress: () => toggleModal() }]}
+      />
     </Layout>
   );
 }

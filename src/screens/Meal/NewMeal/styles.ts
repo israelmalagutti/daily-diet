@@ -13,7 +13,7 @@ export const FormContainer = styled.View`
   bottom: 0;
   left: 0;
 
-  padding: 24px 24px;
+  padding: 24px 24px 32px;
   gap: 24px;
 
   border-radius: 20px;

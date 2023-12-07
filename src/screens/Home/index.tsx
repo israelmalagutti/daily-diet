@@ -20,7 +20,7 @@ export type MealSectionType = {
 };
 
 export function Home() {
-  const [meals, setMeals] = useState<MealType[]>(MEALS);
+  const [meals, setMeals] = useState<MealType[]>([]);
 
   const navigation = useNavigation();
 
