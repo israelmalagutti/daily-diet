@@ -7,6 +7,7 @@ export type ButtonProps = TouchableOpacityProps & {
   text: string;
   icon?: keyof typeof MaterialIcons.glyphMap;
 
+  size?: ButtonTypeStyleProps;
   type?: ButtonTypeStyleProps;
   onPress?: () => void;
 };
@@ -14,15 +15,19 @@ export type ButtonProps = TouchableOpacityProps & {
 export function Button({
   icon,
   text,
+
+  size = "PRIMARY",
   type = "PRIMARY",
   onPress,
   ...rest
 }: ButtonProps) {
   return (
-    <Container {...rest} type={type} onPress={onPress}>
-      {!!icon && <Icon name={icon} size={18} />}
+    <Container {...rest} type={type} size={size} onPress={onPress}>
+      {!!icon && <Icon name={icon} size={18} type={type} />}
 
-      <Text>{text}</Text>
+      <Text type={type} size={size}>
+        {text}
+      </Text>
     </Container>
   );
 }
