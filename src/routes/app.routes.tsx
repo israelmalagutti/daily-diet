@@ -2,7 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { Home } from "@screens/Home";
-import { NewMeal, FeedbackMeal, MealInfo } from "@screens/Meal";
+import { NewMeal, FeedbackMeal, MealInfo, EditMeal } from "@screens/Meal";
 
 import theme from "@theme/index";
 
@@ -19,10 +19,12 @@ export function AppRoutes() {
     >
       <Screen name="home" component={Home} />
 
-      <Screen name="mealInfo" component={MealInfo} />
-
       <Screen name="newMeal" component={NewMeal} />
       <Screen name="feedbackMeal" component={FeedbackMeal} />
+
+      <Screen name="mealInfo" component={MealInfo} />
+
+      <Screen name="editMeal" component={EditMeal} />
     </Navigator>
   );
 }

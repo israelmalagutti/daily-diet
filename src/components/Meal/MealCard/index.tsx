@@ -16,8 +16,6 @@ export type MealType = {
   diet: DietStyleProps;
 };
 
-type MealCardProps = {};
-
 export function MealCard(meal: MealType) {
   const navigation = useNavigation();
 

@@ -80,7 +80,11 @@ export function MealInfo() {
         </InfoContainer>
 
         <ActionsContainer>
-          <Button icon="edit" text="Edit meal" onPress={() => {}} />
+          <Button
+            icon="edit"
+            text="Update meal"
+            onPress={() => navigation.navigate("editMeal", { meal })}
+          />
           <Button
             type="SECONDARY"
             icon="delete-forever"

@@ -6,10 +6,12 @@ export declare global {
     interface RootParamList {
       home: undefined;
 
-      mealInfo: { meal: MealType };
-
       newMeal: undefined;
       feedbackMeal: { diet: DietStyleProps };
+
+      mealInfo: { meal: MealType };
+
+      editMeal: { meal: MealType };
     }
   }
 }

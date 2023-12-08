@@ -33,6 +33,7 @@ type InputProps = TextInputProps & {
 export function Input({
   label,
   size = "DEFAULT",
+  value: originalValue,
 
   maskType,
   maskOptions,
@@ -43,7 +44,7 @@ export function Input({
 
   ...rest
 }: InputProps) {
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>(originalValue || "");
   const [active, setActive] = useState<boolean>(false);
 
   const handleTextChange = useCallback(

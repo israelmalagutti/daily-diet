@@ -1,4 +1,3 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components";
 import {
   useFonts,
