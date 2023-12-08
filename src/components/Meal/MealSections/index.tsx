@@ -15,7 +15,6 @@ export type MealSectionProps = MealSections & {};
 
 /**
  * fix: Sort order should be from newest to oldest
- * fix: bottom of the list exceed screen limit and cannot be seem
  */
 export function MealSections({ meals }: MealSectionProps) {
   const renderSectionHeader = (section: MealSection) => {
@@ -35,6 +34,7 @@ export function MealSections({ meals }: MealSectionProps) {
     <MealCard
       id={meal.id}
       name={meal.name}
+      description={meal.description}
       createdAt={meal.createdAt}
       diet={meal.diet}
     />

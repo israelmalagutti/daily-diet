@@ -210,7 +210,6 @@ export function NewMeal() {
       </FormContainer>
 
       <Modal
-        transparent
         visible={modalOpen}
         message={error.message}
         actions={[{ text: "Okay", onPress: () => toggleModal() }]}

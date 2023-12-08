@@ -1,6 +1,7 @@
 import { ModalProps as RNModalProps } from "react-native";
 
 import { Button } from "../Button";
+import { type ButtonTypeStyleProps } from "../Button/styles";
 
 import {
   ActionsContainer,
@@ -12,6 +13,7 @@ import {
 
 type ModalAction = {
   text: string;
+  type?: ButtonTypeStyleProps;
   onPress: () => void;
 };
 
@@ -24,6 +26,7 @@ export function Modal({ message, actions, visible, ...rest }: ModalProps) {
   return (
     <StyledModal
       {...rest}
+      transparent
       statusBarTranslucent
       animationType="fade"
       visible={visible}
@@ -37,7 +40,8 @@ export function Modal({ message, actions, visible, ...rest }: ModalProps) {
           {actions.map(action => (
             <Button
               key={action.text}
-              type="SECONDARY"
+              type={action.type}
+              size="SECONDARY"
               text={action.text}
               onPress={action.onPress}
             />

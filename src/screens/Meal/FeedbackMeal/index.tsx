@@ -59,7 +59,7 @@ export function FeedbackMeal() {
         <Illustration alt="Illustration" source={ILLUSTRATION} />
 
         <Button
-          type="SECONDARY"
+          size="SECONDARY"
           text=" Go to the home screen"
           onPress={handle}
         />

@@ -1,4 +1,4 @@
-import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { format } from "date-fns";
 
 import { DietStyleProps } from "@components/DietPicker/styles";
@@ -16,17 +16,21 @@ export type MealType = {
   diet: DietStyleProps;
 };
 
-type MealCardProps = {
-  onPress: (id: number) => void;
-};
+type MealCardProps = {};
 
-export function MealCard(meal: MealType, { onPress }: MealCardProps) {
+export function MealCard(meal: MealType) {
+  const navigation = useNavigation();
+
   const date = new Date(meal.createdAt);
 
   const formattedTime = format(date, "HH:mm");
 
+  const handleNavigateMeal = (meal: MealType) => {
+    navigation.navigate("mealInfo", { meal });
+  };
+
   return (
-    <Container onPress={() => onPress(meal.id)}>
+    <Container onPress={() => handleNavigateMeal(meal)}>
       <Time>{formattedTime.padStart(2, "0")}</Time>
       <Spacer />
       <Name>{meal.name}</Name>
