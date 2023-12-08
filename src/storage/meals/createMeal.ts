@@ -7,7 +7,7 @@ import { MEAL_COLLECTION } from "@storage/storageConfig";
 
 import { getAllMeals } from "./getAllMeals";
 
-export const createMeal = async (newMeal: NewMealType | MealType) => {
+export const createMeal = async (newMeal: MealType) => {
   try {
     const storedMeals = await getAllMeals();
 
