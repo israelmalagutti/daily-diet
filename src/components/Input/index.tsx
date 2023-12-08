@@ -44,7 +44,7 @@ export function Input({
 
   ...rest
 }: InputProps) {
-  const [value, setValue] = useState<string>(originalValue || "");
+  const [value, setValue] = useState<string>(originalValue ?? "");
   const [active, setActive] = useState<boolean>(false);
 
   const handleTextChange = useCallback(

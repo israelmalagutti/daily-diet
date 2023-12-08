@@ -35,7 +35,7 @@ export function NewMeal() {
     description: undefined,
 
     createdAt: undefined,
-    diet: undefined,
+    diet: "OFF",
   });
 
   const [date, setDate] = useState<string>("");
@@ -76,7 +76,7 @@ export function NewMeal() {
   };
 
   const formatDate = (newDate: string, newTime: string) => {
-    if (newDate == "" && newTime == "") return;
+    if (newDate == "" && newTime == "") return new Date().toISOString();
 
     const [day, month, year] = newDate.split("/");
     const monthIndex = Number(month) - 1;
@@ -100,10 +100,14 @@ export function NewMeal() {
 
       const id = storedMeals.length + 1;
 
-      const newMeal: NewMealType = {
-        ...meal,
+      const newMeal: MealType = {
         id,
-        createdAt: formatDate(date, time) ?? new Date().toISOString(),
+
+        name: meal.name ?? "",
+        description: meal.description,
+
+        createdAt: formatDate(date, time),
+        diet: meal.diet ?? "OFF",
       };
 
       const formSchema = z.object({
