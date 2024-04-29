@@ -1,20 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { format } from "date-fns";
 
-import { DietStyleProps } from "@components/DietPicker/styles";
+import { MealType } from "@dtos/index";
 
 import { Container, Name, Spacer, Status, Time } from "./styles";
-
-export type MealType = {
-  id: number;
-
-  name: string;
-  description?: string;
-
-  createdAt: string;
-
-  diet: DietStyleProps;
-};
 
 export function MealCard(meal: MealType) {
   const navigation = useNavigation();

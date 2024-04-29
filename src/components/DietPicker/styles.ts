@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components/native";
 
-export type DietStyleProps = "WITHIN" | "OFF";
+import { DietProps } from "dtos/MealType";
+
+export type DietStyleProps = DietProps;
 
 export type StyledPickerProps = {
   isActive: boolean;
