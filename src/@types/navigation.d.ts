@@ -1,13 +1,13 @@
-import { DietStyleProps } from "@components/DietPicker/styles";
-import { MealType } from "@components/Meal/MealCard";
+import type { MealType, DietProps } from "@dtos/MealType";
 
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
       home: undefined;
+      mealStatistics: { meals: MealType[] };
 
       newMeal: undefined;
-      feedbackMeal: { diet: DietStyleProps };
+      feedbackMeal: { diet: DietProps };
 
       mealInfo: { meal: MealType };
 

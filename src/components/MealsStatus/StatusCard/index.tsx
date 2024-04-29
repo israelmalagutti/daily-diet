@@ -1,13 +1,20 @@
 import React from "react";
 
-import { Container, Icon, StatusCardStyleProps } from "./styles";
+import {
+  Container,
+  Icon,
+  CardSizeStyleProp,
+  CardTypeStyleProp,
+} from "./styles";
 
 type StatusCardProps = {
   children: React.ReactNode;
 
+  percentage?: number;
+  size?: CardSizeStyleProp;
+  type?: CardTypeStyleProp;
+
   hasIcon?: boolean;
-  size?: StatusCardStyleProps;
-  type?: StatusCardStyleProps;
 
   onPress?: () => void;
 };
@@ -15,15 +22,21 @@ type StatusCardProps = {
 export function StatusCard({
   children,
 
-  hasIcon,
-  size = "PRIMARY",
+  percentage,
+  size = "MD",
   type = "PRIMARY",
+
+  hasIcon,
 
   onPress,
 }: StatusCardProps) {
+  const STYLE_TYPE: CardTypeStyleProp =
+    (!!type && type) ??
+    (!!percentage && (percentage > 50 ? "PRIMARY" : "SECONDARY"));
+
   return (
-    <Container size={size} type={type} onPress={onPress}>
-      {!!hasIcon && <Icon type={type} />}
+    <Container size={size} type={STYLE_TYPE} onPress={onPress}>
+      {!!hasIcon && <Icon type={STYLE_TYPE} />}
 
       {children}
     </Container>

@@ -1,26 +1,22 @@
 import { Status, Text } from "./styles";
 
 export type StatusTitleProps = {
-  percentage?: number;
+  title?: string;
+  percentage?: string | number;
 
-  title?: string | number;
-  text?: "PRIMARY" | "SECONDARY" | string;
+  text: string;
 };
 
-export function StatusTitle({
-  percentage,
+export function StatusTitle({ percentage, title, text }: StatusTitleProps) {
+  const TITLE = (!!title && title) || (!!percentage && `${percentage}%`);
 
-  title,
-  text = "PRIMARY",
-}: StatusTitleProps) {
+  const SUBTITLE = !!text && text;
+
   return (
     <>
-      <Status>{(title ?? title) || (percentage ?? `${percentage}%`)}</Status>
-      <Text>
-        {(text === "PRIMARY" && "meals within the diet") ||
-          (text === "SECONDARY" && "meals off the diet") ||
-          (text && text)}
-      </Text>
+      <Status>{TITLE}</Status>
+
+      <Text>{SUBTITLE}</Text>
     </>
   );
 }

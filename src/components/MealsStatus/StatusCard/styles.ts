@@ -1,27 +1,27 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { ArrowUpRight } from "phosphor-react-native";
 
-export type StatusCardStyleProps = "PRIMARY" | "SECONDARY" | "TERTIARY";
+export type CardTypeStyleProp = "PRIMARY" | "SECONDARY" | "TERTIARY";
+export type CardSizeStyleProp = "MD" | "SM";
 
-type StatusCardProps = {
-  size: StatusCardStyleProps;
-  type: StatusCardStyleProps;
+type StyleProps = {
+  type: CardTypeStyleProp;
 };
 
-type IconStyleProps = {
-  type: StatusCardStyleProps;
+type CardStyleProps = StyleProps & {
+  size: CardSizeStyleProp;
 };
 
-export const Container = styled.Pressable<StatusCardProps>`
-  position: relative;
-
-  width: ${({ size }) => (size === "PRIMARY" ? "100%" : "auto")};
-  flex: ${({ size }) => (size === "PRIMARY" ? "auto" : 1)};
-
-  background-color: ${({ theme, type }) =>
-    (type === "PRIMARY" && theme.COLORS.GREEN_LIGHT) ||
+export const Container = styled.Pressable<CardStyleProps>`
+  ${({ theme, size, type }) => css`
+    background-color: ${(type === "PRIMARY" && theme.COLORS.GREEN_LIGHT) ||
     (type === "SECONDARY" && theme.COLORS.RED_LIGHT) ||
     (type === "TERTIARY" && theme.COLORS.GRAY_200)};
+
+    width: ${size === "MD" ? "100%" : "auto"};
+    flex: ${size === "MD" ? "auto" : 1};
+  `}
+  position: relative;
 
   align-items: center;
   justify-content: center;
@@ -33,13 +33,15 @@ export const Container = styled.Pressable<StatusCardProps>`
 
 export const Icon = styled(ArrowUpRight).attrs({
   size: 24,
-})<IconStyleProps>`
+})<StyleProps>`
+  ${({ theme, type }) =>
+    css`
+      color: ${(type === "PRIMARY" && theme.COLORS.GREEN_DARK) ||
+      (type === "SECONDARY" && theme.COLORS.RED_DARK)};
+    `}
+
   position: absolute;
 
   top: 8px;
   right: 8px;
-
-  color: ${({ theme, type }) =>
-    (type === "PRIMARY" && theme.COLORS.GREEN_DARK) ||
-    (type === "SECONDARY" && theme.COLORS.RED_DARK)};
 `;
