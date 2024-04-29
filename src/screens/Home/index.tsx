@@ -1,10 +1,11 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import { Button, Header, Layout, Meal, MealsStatus } from "@components/index";
-import { type MealType } from "@components/Meal/MealCard";
 
-import { getAllMeals, MEALS } from "@storage/index";
+import { MealType } from "@dtos/index";
+
+import { getAllMeals } from "@storage/index";
 
 import {
   GroupedByReducerState,
@@ -24,6 +25,12 @@ export function Home() {
 
   const navigation = useNavigation();
 
+  const mealsWithinDiet = meals.filter(meal => meal.diet === "WITHIN").length;
+
+  const averageMealsWithinDiet = Number(
+    ((mealsWithinDiet / meals.length) * 100).toFixed(2)
+  );
+
   const groupByDay = useCallback(
     (data: MealType[]) =>
       Object.entries(
@@ -41,19 +48,32 @@ export function Home() {
     }
   }
 
-  useFocusEffect(
-    useCallback(() => {
-      fetchMeals();
-    }, [])
-  );
+  useFocusEffect(useCallback(() => {}, []));
+
+  useEffect(() => {
+    fetchMeals();
+  }, [meals]);
 
   return (
     <Layout>
       <Header />
 
       <MealsContainer>
-        <MealsStatus.Card hasIcon onPress={() => undefined}>
-          <MealsStatus.Title percentage={90.86} />
+        <MealsStatus.Card
+          hasIcon
+          percentage={(!!averageMealsWithinDiet && averageMealsWithinDiet) || 0}
+          onPress={() =>
+            navigation.navigate("mealStatistics", {
+              meals,
+            })
+          }
+        >
+          <MealsStatus.Title
+            percentage={
+              (!!averageMealsWithinDiet && averageMealsWithinDiet) || 0
+            }
+            text="of meals within the diet"
+          />
         </MealsStatus.Card>
 
         <NewMealContainer>
