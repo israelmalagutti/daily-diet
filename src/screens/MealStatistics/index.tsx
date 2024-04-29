@@ -70,7 +70,7 @@ export function MealStatistics() {
         />
 
         <MealsStatus.Title
-          percentage={String(averageMealsWithinDiet)}
+          percentage={averageMealsWithinDiet}
           text="of meals within the diet"
         />
       </HeaderContainer>
