@@ -6,6 +6,7 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
+      "@dtos/*": ["dtos/*"],
       "@hooks/*": ["hooks/*"],
       "@routes/*": ["routes/*"],
       "@screens/*": ["screens/*"],
